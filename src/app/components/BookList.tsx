@@ -1,8 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import { useGetBooksQuery } from '../features/api/booksApiSlice';
 
 export default function BookList() {
-  const { data: books = [] } = useGetBooksQuery();
+  const { data: books = [], isLoading, isError } = useGetBooksQuery();
+
+  if (isLoading) return <div className="text-center py-8">Loading books...</div>;
+  if (isError) return <div className="text-center py-8 text-red-500">Error loading books</div>;
 
   return (
     <div className="bg-white p-6 rounded-lg shadow">
