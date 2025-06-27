@@ -25,12 +25,20 @@ export const booksApiSlice = apiSlice.injectEndpoints({
     searchBooks: builder.query<Book[], string>({
       query: (query) => `/books/search?query=${query}`,
     }),
+      deleteBook: builder.mutation<void, string>({
+    query: (id) => ({
+      url: `/books/${id}`,
+      method: 'DELETE',
+    }),
+    invalidatesTags: ['Book'],
+  }),
   }),
 });
 
 export const {
   useGetBooksQuery,
   useAddBookMutation,
+ useDeleteBookMutation,
   useProcessBookImageMutation,
   useLazySearchBooksQuery,
 } = booksApiSlice;
