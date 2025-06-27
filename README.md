@@ -47,10 +47,12 @@ A web application for educators and librarians to digitize book collections by p
 ## Screenshots
 
 ### Home Page
-![image](https://github.com/user-attachments/assets/d7c31399-3621-4fc2-833d-f9c625ea83ba)
+![image](https://github.com/user-attachments/assets/07eee52d-a1b6-4e74-8ab2-124b2115886f)
+
 
 ### Book Details
-![Book Details](screenshots/book_details.png)
+![image](https://github.com/user-attachments/assets/ca389db3-61b9-4d93-87ef-a09c88199a1a)
+
 
 ## Technology Stack
 - **Frontend**: React, TypeScript, Tailwind CSS, RTK Query, react-dropzone, Formik, react-toastify
