@@ -1,10 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 import { useGetBooksQuery } from '../features/api/booksApiSlice';
 import BookDetails from './BookDetails';
+import  { Book } from '../types/book';
 
 export default function BookList() {
   const { data: books = [], isLoading, isError, refetch } = useGetBooksQuery();
-  const [selectedBook, setSelectedBook] = useState(null);
+  // Import Book type if not already imported
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   if (isLoading) return (
