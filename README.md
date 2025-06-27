@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Book Inventory Builder
 
-## Getting Started
+A web application for educators and librarians to digitize book collections by photographing book covers and using Google Gemini Flash Vision LLM to extract book details. The application stores book data and images in MongoDB Atlas.
 
-First, run the development server:
+## Setup
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB Atlas account (free tier)
+- Google Gemini API key
+- Git
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/your-username/book-inventory-builder.git
+   cd book-inventory-builder
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Set Up Environment Variables**
+   Create a `.env` file in the root directory based on the provided `sample.env`:
+   ```env
+   MONGODB_URI=your_mongodb_atlas_connection_string
+   GOOGLE_GEMINI_API_KEY=your_gemini_api_key
+   PORT=5000
+   ```
 
-## Learn More
+4. **Run the Backend**
+   ```bash
+   nodemon ./index.ts
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+5. **Run the Frontend**
+   In a new terminal, navigate to the project directory and run:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+6. **Access the Application**
+   Open your browser and navigate to `http://localhost:5173`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Running Tests with CSV
+1. Prepare a CSV file with the following structure:
+   ```csv
+   title,author,gradeLevel,subject,series,coverImage
+   "The Great Gatsby","F. Scott Fitzgerald","9-12","Literature","Classic","data:image/jpeg;base64,/9j/4AAQSkZJRgABAQE..."
+   "Harry Potter and the Sorcerer's Stone","J.K. Rowling","5-8","Fantasy","Harry Potter","data:image/jpeg;base64,/9j/4AAQSkZJRgABAQE..."
+   ```
+2. Upload the CSV file via the "Add New Book" form's CSV upload section to test bulk import.
 
-## Deploy on Vercel
+## Screenshots
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Home Page
+![Home Page](screenshots/home.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Book Form with Image Upload
+![Book Form](screenshots/book_form.png)
+
+### Book Details
+![Book Details](screenshots/book_details.png)
+
+## Technology Stack
+- **Frontend**: React, TypeScript, Tailwind CSS, RTK Query, react-dropzone, Formik, react-toastify
+- **Backend**: Node.js, Express, MongoDB Atlas, Mongoose, Multer, Sharp, csv-parse
+- **AI**: Google Gemini Flash Vision LLM for book detail extraction
+- **Database**: MongoDB Atlas (free tier)
+
+## Design Decisions
+- **MongoDB Atlas**: Chosen for its free tier and scalability, suitable for a single-user app. The document model aligns with flexible book metadata.
+- **Image Storage**: Images are stored as base64-encoded buffers in MongoDB to simplify the architecture and avoid external storage dependencies.
+- **CSV Import**: Added to support bulk testing, allowing users to upload a CSV file with book details and images (base64 or URLs).
+- **Google Gemini Flash**: Selected for its generous free tier and effective vision capabilities for extracting book details from images.
+- **Responsive Design**: Tailwind CSS ensures a mobile-friendly interface, meeting the PRD's web-responsive requirement.
+- **Error Handling**: Comprehensive error handling for image and CSV processing, with user feedback via toast notifications.
+
+## Out of Scope
+- User authentication (single-user app)
+- Advanced inventory management features
+- Mobile app development (web-responsive only)
+
+## Future Improvements
+- Add user authentication for multi-user support
+- Implement advanced search filters (e.g., by grade level or subject)
+- Optimize image storage with external services like AWS S3 for larger collections
+- Add export functionality to download inventory as CSV
