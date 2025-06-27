@@ -32,7 +32,7 @@ A web application for educators and librarians to digitize book collections by p
 
 4. **Run the Backend**
    ```bash
-   nodemon ./index.ts
+   npm run dev
    ```
 
 5. **Run the Frontend**
@@ -42,38 +42,25 @@ A web application for educators and librarians to digitize book collections by p
    ```
 
 6. **Access the Application**
-   Open your browser and navigate to `http://localhost:5173`.
-
-### Running Tests with CSV
-1. Prepare a CSV file with the following structure:
-   ```csv
-   title,author,gradeLevel,subject,series,coverImage
-   "The Great Gatsby","F. Scott Fitzgerald","9-12","Literature","Classic","data:image/jpeg;base64,/9j/4AAQSkZJRgABAQE..."
-   "Harry Potter and the Sorcerer's Stone","J.K. Rowling","5-8","Fantasy","Harry Potter","data:image/jpeg;base64,/9j/4AAQSkZJRgABAQE..."
-   ```
-2. Upload the CSV file via the "Add New Book" form's CSV upload section to test bulk import.
-
+   Open your browser and navigate to `http://localhost:{port}`.
+   
 ## Screenshots
 
 ### Home Page
-![Home Page](screenshots/home.png)
-
-### Book Form with Image Upload
-![Book Form](screenshots/book_form.png)
+![image](https://github.com/user-attachments/assets/d7c31399-3621-4fc2-833d-f9c625ea83ba)
 
 ### Book Details
 ![Book Details](screenshots/book_details.png)
 
 ## Technology Stack
 - **Frontend**: React, TypeScript, Tailwind CSS, RTK Query, react-dropzone, Formik, react-toastify
-- **Backend**: Node.js, Express, MongoDB Atlas, Mongoose, Multer, Sharp, csv-parse
+- **Backend**: Node.js, Express, MongoDB Atlas, Mongoose, Multer, Sharp
 - **AI**: Google Gemini Flash Vision LLM for book detail extraction
 - **Database**: MongoDB Atlas (free tier)
 
 ## Design Decisions
 - **MongoDB Atlas**: Chosen for its free tier and scalability, suitable for a single-user app. The document model aligns with flexible book metadata.
 - **Image Storage**: Images are stored as base64-encoded buffers in MongoDB to simplify the architecture and avoid external storage dependencies.
-- **CSV Import**: Added to support bulk testing, allowing users to upload a CSV file with book details and images (base64 or URLs).
 - **Google Gemini Flash**: Selected for its generous free tier and effective vision capabilities for extracting book details from images.
 - **Responsive Design**: Tailwind CSS ensures a mobile-friendly interface, meeting the PRD's web-responsive requirement.
 - **Error Handling**: Comprehensive error handling for image and CSV processing, with user feedback via toast notifications.
