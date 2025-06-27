@@ -1,4 +1,3 @@
-// components/BookDetails.tsx
 'use client'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
@@ -9,7 +8,8 @@ type Book = {
   _id: string
   title: string
   author: string
-  coverImageUrl?: string
+  coverImage?: string
+  coverImageType?: string
   gradeLevel?: string
   subject?: string
   series?: string
@@ -47,7 +47,6 @@ export default function BookDetails({
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={onClose}>
-      
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -60,7 +59,6 @@ export default function BookDetails({
           <div className="fixed inset-0 bg-black bg-opacity-75" />
         </Transition.Child>
 
-     
         <div className="fixed inset-0 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
@@ -73,7 +71,6 @@ export default function BookDetails({
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
-           
                 <div className="flex justify-between items-start">
                   <Dialog.Title
                     as="h3"
@@ -93,12 +90,11 @@ export default function BookDetails({
                   </button>
                 </div>
 
-           
                 <div className="mt-4">
-                  {book.coverImageUrl && (
+                  {book.coverImage && (
                     <div className="mb-4 flex justify-center">
                       <img 
-                        src={book.coverImageUrl} 
+                        src={book.coverImage}
                         alt={book.title}
                         className="h-48 object-contain rounded"
                       />
@@ -131,7 +127,6 @@ export default function BookDetails({
                   </div>
                 </div>
 
-                {/* Modal footer */}
                 <div className="mt-6 flex space-x-3">
                   <button
                     type="button"

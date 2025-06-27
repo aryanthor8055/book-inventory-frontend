@@ -15,7 +15,11 @@ export const booksApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Book'],
     }),
-    processBookImage: builder.mutation<Book, FormData>({
+    processBookImage: builder.mutation<{
+      success: boolean;
+      data: Partial<Book>;
+      bookId?: string;
+    }, FormData>({
       query: (formData) => ({
         url: '/books/process-image',
         method: 'POST',
@@ -25,20 +29,20 @@ export const booksApiSlice = apiSlice.injectEndpoints({
     searchBooks: builder.query<Book[], string>({
       query: (query) => `/books/search?query=${query}`,
     }),
-      deleteBook: builder.mutation<void, string>({
-    query: (id) => ({
-      url: `/books/${id}`,
-      method: 'DELETE',
+    deleteBook: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `/books/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Book'],
     }),
-    invalidatesTags: ['Book'],
-  }),
   }),
 });
 
 export const {
   useGetBooksQuery,
   useAddBookMutation,
- useDeleteBookMutation,
+  useDeleteBookMutation,
   useProcessBookImageMutation,
   useLazySearchBooksQuery,
 } = booksApiSlice;

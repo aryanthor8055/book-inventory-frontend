@@ -20,7 +20,8 @@ export default function BookForm({ onSuccess }: BookFormProps) {
       gradeLevel: '',
       subject: '',
       series: '',
-      coverImageUrl: '',
+      coverImage: '',
+      coverImageType: '',
     },
     onSubmit: async (values) => {
       try {
@@ -53,7 +54,8 @@ export default function BookForm({ onSuccess }: BookFormProps) {
             title: result.data?.title || '',
             author: result.data?.author || '',
             series: result.data?.series || '',
-            coverImageUrl: URL.createObjectURL(acceptedFiles[0])
+            coverImage: result.data?.coverImage || '',
+            coverImageType: result.data?.coverImageType || ''
           });
         } catch (error) {
           alert('Failed to process image. Please try again or enter details manually.');
@@ -68,7 +70,6 @@ export default function BookForm({ onSuccess }: BookFormProps) {
     <div className="bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-700">
       <h2 className="text-xl font-bold text-white mb-6">Add New Book</h2>
       <form onSubmit={formik.handleSubmit} className="max-h-[80vh] overflow-y-auto pr-2">
-        {/* Custom scrollbar styling */}
         <style jsx>{`
           .overflow-y-auto::-webkit-scrollbar {
             width: 6px;
@@ -87,7 +88,7 @@ export default function BookForm({ onSuccess }: BookFormProps) {
           className={`border-2 border-dashed rounded-lg p-8 text-center mb-6 cursor-pointer transition-colors ${
             isDragActive 
               ? 'border-red-600 bg-red-900/20' 
-              : formik.values.coverImageUrl 
+              : formik.values.coverImage 
                 ? 'border-gray-600 hover:border-red-600' 
                 : 'border-gray-600 hover:border-red-600 bg-gray-700/50'
           }`}
@@ -98,10 +99,10 @@ export default function BookForm({ onSuccess }: BookFormProps) {
               <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-red-600 mb-2"></div>
               <p className="text-gray-300">Processing image...</p>
             </div>
-          ) : formik.values.coverImageUrl ? (
+          ) : formik.values.coverImage ? (
             <div className="flex flex-col items-center">
               <img
-                src={formik.values.coverImageUrl}
+                src={`data:${formik.values.coverImageType};base64,${formik.values.coverImage}`}
                 alt="Book cover preview"
                 className="h-32 object-contain mb-2 rounded"
               />

@@ -3,7 +3,7 @@ import { useGetBooksQuery } from '../features/api/booksApiSlice';
 import BookDetails from './BookDetails';
 
 export default function BookList() {
-  const { data: books = [], isLoading, isError,refetch  } = useGetBooksQuery();
+  const { data: books = [], isLoading, isError, refetch } = useGetBooksQuery();
   const [selectedBook, setSelectedBook] = useState(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -44,9 +44,9 @@ export default function BookList() {
               }}
             >
               <div className="aspect-[2/3] bg-gray-800 rounded-lg overflow-hidden">
-                {book.coverImageUrl ? (
+                {book.coverImage ? (
                   <img
-                    src={book.coverImageUrl}
+                    src={book.coverImage}
                     alt={`Cover of ${book.title}`}
                     className="w-full h-full object-cover group-hover:opacity-75 transition-opacity"
                   />
@@ -81,9 +81,9 @@ export default function BookList() {
                 }}
               >
                 <div className="aspect-[2/3] bg-gray-800 rounded-lg overflow-hidden">
-                  {book.coverImageUrl ? (
+                  {book.coverImage ? (
                     <img
-                      src={book.coverImageUrl}
+                      src={book.coverImage}
                       alt={`Cover of ${book.title}`}
                       className="w-full h-full object-cover group-hover:opacity-75 transition-opacity"
                     />
